@@ -1,0 +1,125 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --page-glow: radial-gradient(circle at 12% 18%, rgba(34, 211, 238, 0.18), transparent 42%),
+      radial-gradient(circle at 88% 10%, rgba(59, 130, 246, 0.15), transparent 34%);
+    --grid-line: rgba(148, 163, 184, 0.12);
+  }
+
+  :root.dark {
+    color-scheme: dark;
+    --page-glow: radial-gradient(circle at 12% 18%, rgba(34, 211, 238, 0.16), transparent 42%),
+      radial-gradient(circle at 88% 10%, rgba(59, 130, 246, 0.14), transparent 34%);
+    --grid-line: rgba(100, 116, 139, 0.16);
+  }
+
+  * {
+    scroll-behavior: smooth;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+    font-family: "Inter", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background-image: var(--page-glow);
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(circle at 50% 10%, black 30%, transparent 85%);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Inter", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    @apply bg-cyan-200 text-slate-900 dark:bg-cyan-500/40 dark:text-white;
+  }
+}
+
+@layer components {
+  .polish-card {
+    position: relative;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 20px -18px rgba(15, 23, 42, 0.22);
+  }
+
+  .polish-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 45%);
+  }
+
+  .dark .polish-card::after {
+    background: linear-gradient(180deg, rgba(148, 163, 184, 0.08), rgba(148, 163, 184, 0) 45%);
+  }
+}
+
+@layer utilities {
+  .page-enter {
+    animation: page-enter 420ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  }
+
+  .polish-transition {
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+  }
+
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+
+:root.dark ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+}
+
+:root.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.45);
+}
