@@ -19,6 +19,7 @@ const Login = () => {
   }, [navigate]);
 
   const handleSubmit = async (event) => {
+    console.log("LOGIN CLICKED");
     event.preventDefault();
     setError("");
     setLoading(true);
