@@ -10,7 +10,6 @@ const createAdmin = async () => {
   try {
     const email = "admin@gmail.com";
 
-    // Remove existing admin user if present to avoid duplicates/old hashes
     await User.deleteOne({ email });
 
     await User.create({
@@ -20,7 +19,7 @@ const createAdmin = async () => {
       role: "admin",
     });
 
-    console.log("? Admin user created");
+    console.log("✅ Admin created — email: admin@gmail.com | password: admin123");
     process.exit();
   } catch (error) {
     console.error(error);
