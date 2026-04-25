@@ -14,18 +14,13 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "Email and password are required" });
     }
 
-    console.log("Incoming:", email, password);
-
     const user = await User.findOne({ email: email.toLowerCase() });
-    console.log("User from DB:", user);
 
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log("Password match:", isMatch);
-
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
@@ -42,7 +37,6 @@ const login = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log("Login error:", error.message);
     res.status(500).json({ message: "Login failed" });
   }
 };
